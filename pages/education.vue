@@ -1,0 +1,132 @@
+<template>
+  <v-layout>
+    <v-flex text-xs-center>
+      <v-avatar :size="200">
+        <img
+          src="../static/images/FrederickDouglass.jpg"
+          height="1723"
+          width="1200"
+          alt="Frederick Douglass"
+        >
+      </v-avatar>
+      <blockquote class="blockquote">
+        &#8220;A little learning, indeed, may be a dangerous thing, but the want of learning is a calamity to any people.&#8221;
+        <footer>
+          <small>
+            <em>&mdash;Frederick Douglass</em>
+          </small>
+        </footer>
+      </blockquote>
+      <v-layout mt-3 row wrap>
+        <v-flex
+          sm6
+          lg6
+          md6
+          offset-sm3
+          offset-md3
+          offset-lg3
+        >
+          <v-card color="green darken-2" class="white--text">
+            <v-layout>
+              <v-flex xs5 mt-3>
+                <v-img
+                  :src="UNTLogo"
+                  height="125px"
+                  contain
+                />
+              </v-flex>
+              <v-flex xs7>
+                <v-card-title primary-title>
+                  <div>
+                    <div class="headline">
+                      University of North Texas
+                    </div>
+                    <div>Denton, TX</div>
+                    <div>(2017)</div>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+            <v-divider light />
+            <v-card-actions class="pa-3">
+              Bachelor's of Science 
+              <v-spacer />
+              Computer Science
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout> 
+      <v-layout mt-3 row wrap>
+        <v-flex
+          sm6
+          lg6
+          md6
+          offset-sm3
+          offset-md3
+          offset-lg3
+        >
+          <v-card color="orange darken-2" class="white--text">
+            <v-layout>
+              <v-flex xs5 mt-3>
+                <v-img
+                  :src="WTWLogo"
+                  height="125px"
+                  contain
+                />
+              </v-flex>
+              <v-flex xs7>
+                <v-card-title primary-title>
+                  <div>
+                    <div class="headline">
+                      Warren Travis White High School
+                    </div>
+                    <div>Dallas, TX</div>
+                    <div>(2010)</div>
+                  </div>
+                </v-card-title>
+              </v-flex>
+            </v-layout>
+            <v-divider light />
+            <v-card-actions class="pa-3">
+              Diploma 
+              <v-spacer />
+              General Studies
+            </v-card-actions>
+          </v-card>
+        </v-flex>   
+      </v-layout>
+      <v-card-actions>
+        <v-btn color="primary" flat nuxt to="/skills">
+          <v-icon>arrow_back</v-icon>
+        </v-btn>
+        <v-spacer />
+        <v-btn color="primary" flat nuxt to="/experience">
+          <v-icon>arrow_forward</v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-flex>
+  </v-layout>
+</template>
+<script>
+export default {
+  data: () => ({
+    UNTLogo: require('../static/images/UNTLogo.png'),
+    WTWLogo: require('../static/images/WTWLogo.png')
+  }),
+  created: function() {
+    window.addEventListener('keydown', this.changePage)
+  },
+  beforeDestroy: function() {
+    window.removeEventListener('keydown', this.changePage)
+  },
+  methods: {
+    changePage: function() {
+      if (event.keyCode === 39) {
+        this.$router.push('experience')
+      } else if (event.keyCode === 37) {
+        this.$router.push('skills')
+      }
+    }
+  }
+}
+</script>

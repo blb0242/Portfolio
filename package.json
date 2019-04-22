@@ -1,0 +1,51 @@
+{
+  "name": "Portfolio",
+  "version": "1.0.0",
+  "description": "Byron Brown&#39;s Web Developement &amp; Design Portfolio website. Freelance Web Developer providing web services in Dallas, TX and surrounding DFW areas. Byron builds modern high-quality websites to help grow businesses and provide marketing solutions.",
+  "author": "Byron Brown",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "emailjs": "^2.2.0",
+    "fs": "0.0.1-security",
+    "net": "^1.0.2",
+    "nodemailer": "^6.1.0",
+    "nuxt": "^2.6.2",
+    "prerender-spa-plugin": "^3.4.0",
+    "tls": "0.0.1",
+    "vee-validate": "^2.2.0",
+    "vue-resource": "^1.5.1",
+    "vue2-touch-events": "^2.0.0",
+    "vuetify": "^1.5.0",
+    "vuetify-loader": "^1.2.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
+    "@nuxtjs/eslint-config": "^0.0.1",
+    "babel-eslint": "^8.2.1",
+    "eslint": "^5.0.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-standard": ">=12.0.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": ">=2.14.0",
+    "eslint-plugin-jest": ">=21.24.1",
+    "eslint-plugin-node": ">=7.0.1",
+    "eslint-plugin-prettier": "2.6.2",
+    "eslint-plugin-promise": ">=4.0.1",
+    "eslint-plugin-standard": ">=4.0.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "material-design-icons-iconfont": "^4.0.5",
+    "nodemon": "^1.18.9",
+    "prettier": "1.14.3",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}
