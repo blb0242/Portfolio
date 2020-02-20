@@ -18,14 +18,12 @@
     "fs": "0.0.1-security",
     "net": "^1.0.2",
     "nodemailer": "^6.1.0",
-    "nuxt": "^2.6.2",
-    "prerender-spa-plugin": "^3.4.0",
+    "nuxt": "^2.11.0",
     "tls": "0.0.1",
     "vee-validate": "^2.2.0",
     "vue-resource": "^1.5.1",
     "vue2-touch-events": "^2.0.0",
-    "vuetify": "^1.5.0",
-    "vuetify-loader": "^1.2.0"
+    "vuetify": "^1.5.22"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
@@ -45,7 +43,10 @@
     "material-design-icons-iconfont": "^4.0.5",
     "nodemon": "^1.18.9",
     "prettier": "1.14.3",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "sass": "^1.25.0",
+    "sass-loader": "^7.3.1",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vuetify-loader": "^1.4.3"
   }
 }

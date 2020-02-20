@@ -1,6 +1,30 @@
 <template>
   <v-layout>
     <v-flex text-xs-center>
+      <v-btn
+        color="green"
+        nuxt 
+        to="/services"
+        dark
+        bottom
+        left
+        fixed
+        fab
+      >
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
+      <v-btn
+        color="green"
+        nuxt 
+        to="/education"
+        dark
+        bottom
+        right
+        fixed
+        fab
+      >
+        <v-icon>arrow_forward</v-icon>
+      </v-btn>
       <v-avatar :size="200">
         <img
           src="../static/images/MayaAngelou.jpg"
@@ -31,15 +55,6 @@
           {{ skill.value }}%
         </v-progress-circular>
       </div>
-      <v-card-actions>
-        <v-btn color="primary" flat nuxt to="/services">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-        <v-spacer />
-        <v-btn color="primary" flat nuxt to="/education">
-          <v-icon>arrow_forward</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-flex>
   </v-layout>
 </template>
@@ -51,6 +66,7 @@
 
 <script>
 export default {
+  transition: 'slide-fade',
   data: () => ({
     skills: [
       {
@@ -68,11 +84,11 @@ export default {
         color: 'red'
       },
       {
-        name: 'JavaScript',
+        name: 'JS',
         interval: {},
         value: 0,
-        max: 85,
-        color: 'blue'
+        max: 90,
+        color: 'yellow'
       },
       {
         name: 'PHP',
@@ -82,11 +98,32 @@ export default {
         color: 'orange'
       },
       {
+        name: 'SQL',
+        interval: {},
+        value: 0,
+        max: 90,
+        color: 'purple'
+      },
+      {
         name: 'C/C++',
         interval: {},
         value: 0,
         max: 90,
         color: 'black'
+      },
+      {
+        name: 'Python',
+        interval: {},
+        value: 0,
+        max: 75,
+        color: 'grey'
+      },
+      {
+        name: 'ReactJS',
+        interval: {},
+        value: 0,
+        max: 75,
+        color: 'blue'
       },
       {
         name: 'VueJS',
@@ -96,14 +133,29 @@ export default {
         color: 'green'
       },
       {
-        name: 'Laravel',
+        name: 'NodeJS',
         interval: {},
         value: 0,
         max: 80,
         color: 'pink'
       }
-    ]
+    ],
+    page: 3
   }),
+  computed: {
+    nextPage: function() {
+      const nextPage = this.page + 1
+      console.log(nextPage)
+      console.log(this.$router.options.routes[nextPage].path)
+      return this.$router.options.routes[nextPage].path
+    },
+    prevPage: function() {
+      const prevPage = this.page - 1
+      console.log(prevPage)
+      console.log(this.$router.options.routes[prevPage].path)
+      return this.$router.options.routes[prevPage].path
+    }
+  },
   created: function() {
     window.addEventListener('keydown', this.changePage)
   },
@@ -125,11 +177,16 @@ export default {
   },
   methods: {
     changePage: function() {
+      const nextPage = this.page + 1
+      const prevPage = this.page - 1
       if (event.keyCode === 39) {
-        this.$router.push('education')
+        console.log(this.$router.options.routes[nextPage].path)
+        this.$router.push(this.$router.options.routes[nextPage].name)
       } else if (event.keyCode === 37) {
-        this.$router.push('services')
+        console.log(this.$router.options.routes[prevPage].path)
+        this.$router.push(this.$router.options.routes[prevPage].name)
       }
+      return this.$router.options.routes[prevPage].path
     }
   }
 }

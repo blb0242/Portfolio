@@ -1,16 +1,14 @@
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
-const path = require('path') 
-const PrerenderSPAPlugin = require('prerender-spa-plugin')
 
 module.exports = {
   mode: 'spa',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: 'Byron Brown | Web Development &amp; Design in Dallas, TX',
+    title: 'Byron Brown | Web Development & Design in Dallas, TX',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -18,7 +16,7 @@ module.exports = {
       { property: 'og:type', content: 'website' },
       {
         property: 'og:title',
-        content: 'Byron Brown | Web Development &amp; Design in Dallas, TX'
+        content: 'Byron Brown | Web Development & Design in Dallas, TX'
       },
       {
         property: 'og:description',
@@ -30,15 +28,16 @@ module.exports = {
       { name: 'twitter:url', content: 'http://www.byronlbrown.com' },
       {
         name: 'twitter:title',
-        content: 'Byron Brown | Web Development &amp; Design in Dallas, TX'
+        content: 'Byron Brown | Web Development & Design in Dallas, TX'
       },
       {
         name: 'twitter:description',
         content: pkg.description
       },
       { name: 'twitter:image', content: 'http://byronlbrown.com/BBlogo.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'pinterest', content: 'nopin' },
-      { name:'keywords', content:'Biography, Web, Developer, Design' },
+      { name: 'keywords', content: 'Biography, Web, Developer, Design' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
@@ -56,35 +55,33 @@ module.exports = {
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: '~/components/loading.vue',
 
   /*
-  ** Global CSS
-  */
-  css: ['~/assets/style/app.styl'],
+   ** Global CSS
+   */
+  css: ['~/assets/style/main.css','~/assets/style/app.styl'],
 
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: ['@/plugins/vuetify'],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [],
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin(),new PrerenderSPAPlugin({
-      staticDir: path.join(__dirname, 'dist'),
-      // Required - Routes to render.
-      routes: [ '/', '/about', '/contact,','/education','/experience','/services','/skills','/work' ],
-    })],
+    plugins: [
+      new VuetifyLoaderPlugin()
+    ],
     loaders: {
       stylus: {
         import: ['~assets/style/variables.styl']
@@ -92,8 +89,8 @@ module.exports = {
     },
 
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -101,9 +98,19 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
         })
       }
+    }
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out',
+    beforeEnter (el) {
+      console.log('Before enter...');
     }
   }
 }

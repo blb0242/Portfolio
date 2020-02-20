@@ -1,53 +1,76 @@
 <template>
   <v-layout>
-    <v-flex text-xs-center>
-      <v-avatar :size="200">
-        <img
-          src="../static/images/ColinPowell.jpg"
-          height="1200"
-          width="933"
-          alt="Colin Powell"
-        >
-      </v-avatar>
-      <blockquote class="blockquote">
-        &#8220;Success is the result of perfection, hard work, learning from failure, loyalty to those for whom you work and persistence.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;Colin Powell</em>
-          </small>
-        </footer>
-      </blockquote>
-      <serviceCard 
-        v-for="(service, index) in services" 
-        :key="index" 
-        :description="service.description"
-        :service="service.service"
-        :image="service.image"
-      />
-      <v-card-actions>
-        <v-btn color="primary" flat nuxt to="/about">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-        <v-spacer />
-        <v-btn color="primary" flat nuxt to="/skills">
-          <v-icon>arrow_forward</v-icon>
-        </v-btn>
-      </v-card-actions>
+    <v-flex>
+      <v-btn
+        color="green"
+        nuxt 
+        to="/about"
+        dark
+        bottom
+        left
+        fixed
+        fab
+      >
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
+      <v-btn
+        color="green"
+        nuxt 
+        to="/skills"
+        dark
+        bottom
+        right
+        fixed
+        fab
+      >
+        <v-icon>arrow_forward</v-icon>
+      </v-btn>
+      <v-flex text-xs-center>
+        <v-avatar :size="200">
+          <img
+            src="../static/images/ColinPowell.jpg"
+            height="1200"
+            width="933"
+            alt="Colin Powell"
+          >
+        </v-avatar>
+        <blockquote class="blockquote">
+          &#8220;Success is the result of perfection, hard work, learning from failure, loyalty to those for whom you work and persistence.&#8221;
+          <footer>
+            <small>
+              <em>&mdash;Colin Powell</em>
+            </small>
+          </footer>
+        </blockquote>
+      </v-flex>
+
+      <v-container fluid>
+        <v-layout row wrap>
+          <serviceCard 
+            v-for="(service, index) in services" 
+            :key="index" 
+            :description="service.description"
+            :service="service.service"
+            :image="service.image"
+          />
+        </v-layout>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>
-
-<style >
-</style>
 
 <script>
 import ServiceCard from '~/components/ServiceCard.vue'
 
 export default {
+  transition: 'slide-fade',
   components: {
     ServiceCard
   },
   data: () => ({
+    alignment: 'center',
+    dense: false,
+    justify: 'center',
     services: [
       {
         id: 1,
@@ -70,8 +93,23 @@ export default {
         description:
           'Secure yet simple user experience. No worry of sensitive information being misused or malware attacking your computer. Along with user experience, security is a feature that is not only needed but also proves legitimacy of a product.'
       }
-    ]
+    ],
+    page: 2
   }),
+  computed: {
+    nextPage: function() {
+      const nextPage = this.page + 1
+      console.log(nextPage)
+      console.log(this.$router.options.routes[nextPage].path)
+      return this.$router.options.routes[nextPage].path
+    },
+    prevPage: function() {
+      const prevPage = this.page - 1
+      console.log(prevPage)
+      console.log(this.$router.options.routes[prevPage].path)
+      return this.$router.options.routes[prevPage].path
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
@@ -87,11 +125,16 @@ export default {
   },
   methods: {
     changePage: function() {
+      const nextPage = this.page + 1
+      const prevPage = this.page - 1
       if (event.keyCode === 39) {
-        this.$router.push('skills')
+        console.log(this.$router.options.routes[nextPage].path)
+        this.$router.push(this.$router.options.routes[nextPage].name)
       } else if (event.keyCode === 37) {
-        this.$router.push('about')
+        console.log(this.$router.options.routes[prevPage].path)
+        this.$router.push(this.$router.options.routes[prevPage].name)
       }
+      return this.$router.options.routes[prevPage].path
     }
   }
 }

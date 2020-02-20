@@ -1,5 +1,29 @@
 <template>
   <v-layout>
+    <v-btn
+      color="green"
+      nuxt 
+      to="/experience"
+      dark
+      bottom
+      left
+      fixed
+      fab
+    >
+      <v-icon>arrow_back</v-icon>
+    </v-btn>
+    <v-btn
+      color="green"
+      nuxt 
+      to="/contact"
+      dark
+      bottom
+      right
+      fixed
+      fab
+    >
+      <v-icon>arrow_forward</v-icon>
+    </v-btn> 
     <v-flex text-xs-center>
       <v-avatar :size="200">
         <img
@@ -30,27 +54,25 @@
             </v-card-title>
             <v-card-text class="black text--primary">
               <p>{{ item.description }}</p>
-              <v-btn :color="item.color" :href="item.url" class="mx-0" outline>
+              <v-btn
+                :color="item.color"
+                :href="item.url"
+                target="_blank"
+                class="mx-0"
+                outline
+              >
                 Visit
               </v-btn>
             </v-card-text>
           </v-card>
         </v-timeline-item>
       </v-timeline>
-      <v-card-actions>
-        <v-btn color="primary" flat nuxt to="/experience">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-        <v-spacer />
-        <v-btn color="primary" flat nuxt to="/contact">
-          <v-icon>arrow_forward</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-flex>
   </v-layout>
 </template>
 <script>
 export default {
+  transition: 'slide-fade',
   data: () => ({
     items: [
       {
@@ -92,9 +114,34 @@ export default {
         description:
           'Standard company website for Yount Motorsports, a racing company. The site features recent news blogs, galleries for race events, and other company information. The site was built with Wix and I was a contributor on various components of the site.',
         date: 'Februrary, 2019'
+      },
+      {
+        color: 'orange',
+        icon: 'code',
+        title: 'Currently',
+        url: '/',
+        image: require('../static/images/js-screenshot.jpg'),
+        description:
+          "While at DealerSocket, my first priority is to keep learning ReactJS alongside Python, creating projects that involve API integration. By Summer 2020, the goal is to have Tizzy Visions 2.0 built using React and possibly building a CMS for client's that want websites making it easy to deploy.",
+        date: 'Februrary, 2020'
       }
-    ]
+    ],
+    page: 6
   }),
+  computed: {
+    nextPage: function() {
+      const nextPage = this.page + 1
+      console.log(nextPage)
+      console.log(this.$router.options.routes[nextPage].path)
+      return this.$router.options.routes[nextPage].path
+    },
+    prevPage: function() {
+      const prevPage = this.page - 1
+      console.log(prevPage)
+      console.log(this.$router.options.routes[prevPage].path)
+      return this.$router.options.routes[prevPage].path
+    }
+  },
   created: function() {
     window.addEventListener('keydown', this.changePage)
   },
@@ -103,11 +150,16 @@ export default {
   },
   methods: {
     changePage: function() {
+      const nextPage = this.page + 1
+      const prevPage = this.page - 1
       if (event.keyCode === 39) {
-        this.$router.push('contact')
+        console.log(this.$router.options.routes[nextPage].path)
+        this.$router.push(this.$router.options.routes[nextPage].name)
       } else if (event.keyCode === 37) {
-        this.$router.push('experience')
+        console.log(this.$router.options.routes[prevPage].path)
+        this.$router.push(this.$router.options.routes[prevPage].name)
       }
+      return this.$router.options.routes[prevPage].path
     }
   }
 }

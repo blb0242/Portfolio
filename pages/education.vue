@@ -1,5 +1,29 @@
 <template>
   <v-layout>
+    <v-btn
+      color="green"
+      nuxt 
+      to="/skills"
+      dark
+      bottom
+      left
+      fixed
+      fab
+    >
+      <v-icon>arrow_back</v-icon>
+    </v-btn>
+    <v-btn
+      color="green"
+      nuxt 
+      to="/experience"
+      dark
+      bottom
+      right
+      fixed
+      fab
+    >
+      <v-icon>arrow_forward</v-icon>
+    </v-btn>
     <v-flex text-xs-center>
       <v-avatar :size="200">
         <img
@@ -95,24 +119,31 @@
           </v-card>
         </v-flex>   
       </v-layout>
-      <v-card-actions>
-        <v-btn color="primary" flat nuxt to="/skills">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-        <v-spacer />
-        <v-btn color="primary" flat nuxt to="/experience">
-          <v-icon>arrow_forward</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-flex>
   </v-layout>
 </template>
 <script>
 export default {
+  transition: 'slide-fade',
   data: () => ({
     UNTLogo: require('../static/images/UNTLogo.png'),
-    WTWLogo: require('../static/images/WTWLogo.png')
+    WTWLogo: require('../static/images/WTWLogo.png'),
+    page: 4
   }),
+  computed: {
+    nextPage: function() {
+      const nextPage = this.page + 1
+      console.log(nextPage)
+      console.log(this.$router.options.routes[nextPage].path)
+      return this.$router.options.routes[nextPage].path
+    },
+    prevPage: function() {
+      const prevPage = this.page - 1
+      console.log(prevPage)
+      console.log(this.$router.options.routes[prevPage].path)
+      return this.$router.options.routes[prevPage].path
+    }
+  },
   created: function() {
     window.addEventListener('keydown', this.changePage)
   },
@@ -122,7 +153,9 @@ export default {
   methods: {
     changePage: function() {
       if (event.keyCode === 39) {
-        this.$router.push('experience')
+        const nextPage = this.page + 1
+        console.log(this.$router.options.routes[nextPage].path)
+        this.$router.push(this.$router.options.routes[nextPage].name)
       } else if (event.keyCode === 37) {
         this.$router.push('skills')
       }

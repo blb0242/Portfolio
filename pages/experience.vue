@@ -1,5 +1,29 @@
 <template>
   <v-layout>
+    <v-btn
+      color="green"
+      nuxt 
+      to="/education"
+      dark
+      bottom
+      left
+      fixed
+      fab
+    >
+      <v-icon>arrow_back</v-icon>
+    </v-btn>
+    <v-btn
+      color="green"
+      nuxt 
+      to="/work"
+      dark
+      bottom
+      right
+      fixed
+      fab
+    >
+      <v-icon>arrow_forward</v-icon>
+    </v-btn>
     <v-flex text-xs-center>
       <v-avatar :size="200">
         <img
@@ -26,7 +50,7 @@
         offset-lg3
       >
         <experienceCard 
-          v-for="(experience, index) in experiences" 
+          v-for="(experience, index) in experiences.reverse()" 
           :key="index" 
           :description="experience.description"
           :name="experience.name"
@@ -36,15 +60,6 @@
           :color="experience.color"
         />
       </v-flex>
-      <v-card-actions>
-        <v-btn color="primary" flat nuxt to="/education">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-        <v-spacer />
-        <v-btn color="primary" flat nuxt to="/work">
-          <v-icon>arrow_forward</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-flex>
   </v-layout>
 </template>
@@ -53,6 +68,7 @@
 import ExperienceCard from '~/components/ExperienceCard.vue'
 
 export default {
+  transition: 'slide-fade',
   components: {
     ExperienceCard
   },
@@ -73,13 +89,38 @@ export default {
         job: 'Delivery Driver',
         name: 'i Fratelli Pizza',
         image: require('../static/images/fratelliLogo.png'),
-        time: '2014 - Present',
+        time: '2014 - 2019',
         description:
           'User first design paradigm to enable a flawless user experience. Responsive design and speed optimized for seemless and on the go experience. Limited but relevant color palette that gives a theme around the product.',
         color: '#E74B32'
+      },
+      {
+        id: 3,
+        job: 'Technical Support Engineer I',
+        name: 'DealerSocket',
+        image: require('../static/images/ds-logo.svg'),
+        time: '2019 - Present',
+        description:
+          'User first design paradigm to enable a flawless user experience. Responsive design and speed optimized for seemless and on the go experience. Limited but relevant color palette that gives a theme around the product.',
+        color: '#CE2026'
       }
-    ]
+    ],
+    page: 5
   }),
+  computed: {
+    nextPage: function() {
+      const nextPage = this.page + 1
+      console.log(nextPage)
+      console.log(this.$router.options.routes[nextPage].path)
+      return this.$router.options.routes[nextPage].path
+    },
+    prevPage: function() {
+      const prevPage = this.page - 1
+      console.log(prevPage)
+      console.log(this.$router.options.routes[prevPage].path)
+      return this.$router.options.routes[prevPage].path
+    }
+  },
   created: function() {
     window.addEventListener('keydown', this.changePage)
   },
@@ -88,11 +129,16 @@ export default {
   },
   methods: {
     changePage: function() {
+      const nextPage = this.page + 1
+      const prevPage = this.page - 1
       if (event.keyCode === 39) {
-        this.$router.push('work')
+        console.log(this.$router.options.routes[nextPage].path)
+        this.$router.push(this.$router.options.routes[nextPage].name)
       } else if (event.keyCode === 37) {
-        this.$router.push('education')
+        console.log(this.$router.options.routes[prevPage].path)
+        this.$router.push(this.$router.options.routes[prevPage].name)
       }
+      return this.$router.options.routes[prevPage].path
     }
   }
 }

@@ -1,9 +1,21 @@
 <template>
   <v-layout>
+    <v-btn
+      color="green"
+      nuxt 
+      to="work"
+      dark
+      bottom
+      left
+      fixed
+      fab
+    >
+      <v-icon>arrow_back</v-icon>
+    </v-btn>
     <v-flex>
       <v-flex mt-5 text-xs-center>
         <v-flex xs12 sm6 offset-sm3>
-          <v-flex v-touch:tap="touchHandler" v-touch-class="'active'" class="flip-card">
+          <v-flex v-touch:start="touchHandler" v-touch-class="'active'" class="flip-card">
             <div class="flip-card-inner">
               <v-card class="flip-card-front" />
               <v-card class="flip-card-back">
@@ -62,6 +74,7 @@
           class="mx-3"
           dark
           icon
+          target="_blank"
           :href="social.link"
         >
           <v-icon size="24px">
@@ -70,11 +83,6 @@
         </v-btn>
       </v-card-title>
       <div>Logo made with <a href="https://www.designevo.com/en/" title="Free Online Logo Maker">DesignEvo</a></div>
-      <v-card-actions>
-        <v-btn color="primary" flat nuxt to="/work">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-flex>
   </v-layout>
 </template>
@@ -136,26 +144,7 @@ import Vue2TouchEvents from 'vue2-touch-events'
 Vue.use(Vue2TouchEvents)
 
 export default {
-  function(req, res, next) {
-    const paths = [
-      '/',
-      '/about',
-      '/experience',
-      '/eduaction',
-      '/skills',
-      '/services',
-      '/work'
-    ]
-
-    if (paths.includes(req.originalUrl)) {
-      // Will trigger the "traditional SPA mode"
-      res.spa = true
-    }
-    // Don't forget to call next in all cases!
-    // Otherwise, your app will be stuck forever :|
-    next()
-  },
-
+  transition: 'slide-fade',
   data: () => ({
     hover: false,
     name: '',
@@ -200,9 +189,17 @@ export default {
         icon: 'fab fa-instagram',
         link: 'https://www.instagram.com/Imjust_byron/'
       }
-    ]
+    ],
+    page: 7
   }),
-  mounted() {},
+  computed: {
+    prevPage: function() {
+      const prevPage = this.page - 1
+      console.log(prevPage)
+      console.log(this.$router.options.routes[prevPage].path)
+      return this.$router.options.routes[prevPage].path
+    }
+  },
   created: function() {
     window.addEventListener('keydown', this.changePage)
   },
@@ -211,9 +208,12 @@ export default {
   },
   methods: {
     changePage: function() {
-      if (event.keyCode === 37) {
-        this.$router.push('work')
+      const prevPage = this.page - 1
+      if (event.keyCode === 39) {
+        console.log(this.$router.options.routes[prevPage].path)
+        this.$router.push(this.$router.options.routes[prevPage].name)
       }
+      return this.$router.options.routes[prevPage].path
     },
     touchHandler(event) {
       console.log(event) // May be left / right / top / bottom

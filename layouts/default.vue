@@ -12,7 +12,7 @@
         </v-avatar>
       </v-flex>
       <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+        <v-list-tile v-for="(item, x) in items" :key="x" :to="item.to" router exact>
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -30,9 +30,9 @@
       <v-btn icon @click.stop="clipped = !clipped">
         <v-icon>web</v-icon>
       </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
+      <!-- <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>remove</v-icon>
-      </v-btn>
+      </v-btn> -->
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-toolbar>
@@ -54,7 +54,7 @@
       >
         <v-divider />
         <v-card-actions class="grey darken-3 justify-center">
-          &copy;2019 — <strong>BBrown</strong>
+          &copy;2020 — <strong>BBrown</strong>
         </v-card-actions>
       </v-card>
     </v-footer>
@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       clipped: false,
-      drawer: true,
+      drawer: false,
       fixed: false,
       items: [
         {
