@@ -1,17 +1,5 @@
 <template>
   <v-layout>
-    <v-btn
-      color="green"
-      nuxt 
-      to="work"
-      dark
-      bottom
-      left
-      fixed
-      fab
-    >
-      <v-icon>arrow_back</v-icon>
-    </v-btn>
     <v-flex>
       <v-flex mt-5 text-xs-center>
         <v-flex xs12 sm6 offset-sm3>

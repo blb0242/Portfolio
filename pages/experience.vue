@@ -1,29 +1,5 @@
 <template>
   <v-layout>
-    <v-btn
-      color="green"
-      nuxt 
-      to="/education"
-      dark
-      bottom
-      left
-      fixed
-      fab
-    >
-      <v-icon>arrow_back</v-icon>
-    </v-btn>
-    <v-btn
-      color="green"
-      nuxt 
-      to="/work"
-      dark
-      bottom
-      right
-      fixed
-      fab
-    >
-      <v-icon>arrow_forward</v-icon>
-    </v-btn>
     <v-flex text-xs-center>
       <v-avatar :size="200">
         <img

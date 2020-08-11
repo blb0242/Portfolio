@@ -1,18 +1,6 @@
 <template>
   <v-layout @keyup.enter="nextPage">
     <v-flex text-xs-center>
-      <v-btn
-        color="green"
-        nuxt 
-        to="/about"
-        dark
-        bottom 
-        fixed
-        right
-        fab
-      >
-        <v-icon>arrow_forward</v-icon>
-      </v-btn>
       <v-avatar :size="200">
         <img
           src="../static/images/MLKJr.jpeg"

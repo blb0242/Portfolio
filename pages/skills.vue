@@ -1,30 +1,6 @@
 <template>
   <v-layout>
     <v-flex text-xs-center>
-      <v-btn
-        color="green"
-        nuxt 
-        to="/services"
-        dark
-        bottom
-        left
-        fixed
-        fab
-      >
-        <v-icon>arrow_back</v-icon>
-      </v-btn>
-      <v-btn
-        color="green"
-        nuxt 
-        to="/education"
-        dark
-        bottom
-        right
-        fixed
-        fab
-      >
-        <v-icon>arrow_forward</v-icon>
-      </v-btn>
       <v-avatar :size="200">
         <img
           src="../static/images/MayaAngelou.jpg"
