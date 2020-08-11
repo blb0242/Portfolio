@@ -41,7 +41,7 @@
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "material-design-icons-iconfont": "^4.0.5",
-    "nodemon": "^1.18.9",
+    "nodemon": "^2.0.4",
     "prettier": "1.14.3",
     "sass": "^1.25.0",
     "sass-loader": "^7.3.1",
