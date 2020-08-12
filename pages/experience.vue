@@ -26,7 +26,7 @@
         offset-lg3
       >
         <ExperienceCard 
-          v-for="(experience, index) in experiences" 
+          v-for="(experience, index) in experiences.reverse()" 
           :key="index" 
           :description="experience.description"
           :name="experience.name"
